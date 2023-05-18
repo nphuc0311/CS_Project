@@ -1,4 +1,4 @@
-# Anime Filter
+# CS Project
 ## Prerequisites
 
 Install: Dlib and Gif2Numpy
@@ -9,7 +9,7 @@ pip -r requirements.txt
 
 ## Download 
 
-CNN Dlib Face Detector - [mmod_human_face_detector.dat](http://dlib.net/files/mmod_human_face_detector.dat.bz2) <br />
+CNN Dlib Face Detector - [mmod_human_face_detector.dat](http://dlib.net/files/mmod_human_face_detector.dat.bz2)<br />
 CNN Dlib face Landmark Detection - [shape_predictor_68_face_landmarks.dat](http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2)
 
 ## Suggestion
