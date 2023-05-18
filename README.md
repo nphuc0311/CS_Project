@@ -33,8 +33,7 @@ CNN Dlib face Landmark Detection - [shape_predictor_68_face_landmarks.dat](http:
 
 ## How to code your effect
 
-In **ultis.py**, please code your effect in to function **phat_effect** or **nam_effect**<br />
-Example:
+In **ultis.py**, please code your effect in to function **phat_effect** or **nam_effect**
 ```
 def phat_effect(detector, predictor, frame):
     # Write your code here
@@ -45,6 +44,10 @@ def nam_effect(detector, predictor, frame):
     # Write your code here
     ...
     return frame
+```
+Change the **.gif path** if needed in **main.py**
+```
+gif_to_numpy("path_to_gif")
 ```
 Then **uncomment** your function effect in **main.py**
 ```
