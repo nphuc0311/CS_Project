@@ -15,8 +15,8 @@ if __name__ == "__main__":
         if ret:
         
             frame = phuc_effect(detector, predictor, frame)
-            # frame = phat_effect(detector, predictor, frame)
-            # frame = nam_effect(detector, predictor, frame)
+        #   frame = phat_effect(detector, predictor, frame)
+        #   frame = nam_effect(detector, predictor, frame)
 
             cv2.imshow('frame',frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):

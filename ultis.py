@@ -69,7 +69,7 @@ def phuc_effect(detector, predictor, frame):
     hair_mask = cv2.imread("images/ssj_hair.png", cv2.IMREAD_UNCHANGED)[...,3]
 
     # Load golden aura sprite images (animation)
-    glow_imgs = np.load("gif/effect.npy")
+    glow_imgs = np.load('gif/effect.npy')
 
     # Load black hair image with alpha mask
     black_hair = cv2.imread("images/black_hair.png")
