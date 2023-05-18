@@ -10,7 +10,7 @@ def gif_to_numpy(image):
     frames, exts, image_specs = gif2numpy.convert(image)
     sprites=np.array(frames)
 
-    return sprites
+    np.save("gif/effect.npy", sprites)
 
 
 def merge(frame, hair, mask, centre):
@@ -69,7 +69,7 @@ def phuc_effect(detector, predictor, frame):
     hair_mask = cv2.imread("images/ssj_hair.png", cv2.IMREAD_UNCHANGED)[...,3]
 
     # Load golden aura sprite images (animation)
-    glow_imgs = np.load('gif/glow_mini.npy')
+    glow_imgs = np.load("gif/effect.npy")
 
     # Load black hair image with alpha mask
     black_hair = cv2.imread("images/black_hair.png")
