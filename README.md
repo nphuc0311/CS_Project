@@ -59,4 +59,8 @@ Then **uncomment** your function effect in **main.py**
 
 ```
 python main.py
+<<<<<<< HEAD
 ```
+=======
+```
+>>>>>>> d0a5b48b00818178da24b4415d90186e09efece1
