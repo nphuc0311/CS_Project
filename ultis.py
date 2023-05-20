@@ -150,7 +150,7 @@ def phuc_effect(detector, predictor, frame, frame_count):
     return frame
 
 
-def phat_effect(detector, predictor, frame, frame_count):
+def phat_effect(detector, predictor, frame):
    
     # Load custom hair image with alpha mask
     eyes_image = cv2.imread("images/rinnergan.png")
@@ -199,15 +199,38 @@ def phat_effect(detector, predictor, frame, frame_count):
 
     return frame
 
-    
-
-
-    return frame
 
 
 def nam_effect(detector, predictor, frame):
    
-    # Write your code heref
+    # Load custom hair image with alpha mask
+    mask_image = cv2.imread("images/anbu.png")
+    mask_mask = cv2.imread("images/anbu.png", cv2.IMREAD_UNCHANGED)[...,3]
 
-   return frame
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    # Detect faces from the grayscale image
+    faces = detector(gray)
+
+    if len(faces) == 1:
+        landmarks = predictor(gray, faces[0])
+
+        # Left eyes
+        left_point = (landmarks.part(1).x, landmarks.part(1).y)
+        right_point = (landmarks.part(15).x, landmarks.part(15).y)
+
+        hair_width = int(hypot(left_point[0] - right_point[0],
+                        left_point[1] - right_point[1])*1.5)
+        hair_height = int(hair_width*1.1)
+
+        # Resize hair and mask
+        mmask =  cv2.resize(mask_image, (hair_width, hair_height))
+        mask =  cv2.resize(mask_mask, (hair_width, hair_height), interpolation = cv2.INTER_NEAREST)
+
+        eyes_x = int(landmarks.part(27).x)
+        eyes_y = abs(landmarks.part(27).y)
+
+        merge(frame, mmask, mask, (eyes_x, eyes_y))
+
+    return frame
 

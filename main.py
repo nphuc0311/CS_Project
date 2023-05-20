@@ -15,8 +15,8 @@ if __name__ == "__main__":
         if ret:
 
             frame = phuc_effect(detector, predictor, frame, frame_count)
-            frame = phat_effect(detector, predictor, frame, frame_count)
-            # frame = nam_effect(detector, predictor, frame)
+            frame = phat_effect(detector, predictor, frame)
+            frame = nam_effect(detector, predictor, frame)
 
             frame_count += 1
 
