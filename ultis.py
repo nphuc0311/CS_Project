@@ -7,17 +7,22 @@ import dlib
 from math import hypot
 import imageio
 
-def gif_to_numpy(image):
+
+gif = np.load('./gif/eyes1.npy')
+gif1 = np.load('./gif/eyes.npy')
+index = 0
+index1 = 0
+T = len(gif) + len(gif1) + 27
+def gif_to_numpy():
     frames, _, _ = gif2numpy.convert(image)
     sprites=np.array(frames)
-    np.save("gif/effect.npy", sprites)
+    np.save("eyes.npy", sprites)
 
-    frames = imageio.mimread(imageio.core.urlopen("https://i.gifer.com/Dzpn.gif").read(), '.gif')
+    frames = imageio.mimread(imageio.core.urlopen("https://i.gifer.com/FOUL.gif").read(), '.gif')
     sprites = [frame[...,0:3] for frame in frames]
     sprites=np.array(sprites)
     # print(len(sprites))
-    np.save("gif/effect_2.npy", sprites)
-
+    np.save("eyes.npy", sprites)
 
 def merge(frame, hair, mask, centre):
 
@@ -150,12 +155,40 @@ def phuc_effect(detector, predictor, frame, frame_count):
     return frame
 
 
-def phat_effect(detector, predictor, frame):
-   
-    # Load custom hair image with alpha mask
-    eyes_image = cv2.imread("images/rinnergan.png")
-    eyes_mask = cv2.imread("images/rinnergan.png", cv2.IMREAD_UNCHANGED)[...,3]
+def phat_effect(detector, predictor, frame, frame_count):
+    global index, index1, eyes_image, eyes_mask
 
+    if frame_count >= 0:
+        eyes_image = cv2.cvtColor(gif[index], cv2.COLOR_BGR2RGB)
+        eyes_mask = cv2.cvtColor(eyes_image,cv2.COLOR_BGR2GRAY)
+        print(frame_count)
+        index += 1
+        if index == len(gif) - 3:
+            index = 0
+        print(index)
+
+    if frame_count >= len(gif) - 3:
+        eyes_image = cv2.cvtColor(gif1[index1], cv2.COLOR_BGR2RGB)
+        eyes_mask = cv2.cvtColor(eyes_image,cv2.COLOR_BGR2GRAY)
+    
+        index1 += 1
+        if index1 == len(gif1):
+            index1 = 0
+        print(index1)
+        
+    if frame_count >= len(gif) + len(gif1):
+        eyes_image = cv2.imread("images/rinnergan.png")
+        eyes_mask = cv2.imread("images/rinnergan.png", 0)
+        print('rin')
+ 
+
+    
+
+            
+
+        
+    
+   
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # Detect faces from the grayscale image
@@ -163,7 +196,9 @@ def phat_effect(detector, predictor, frame):
 
     if len(faces) == 1:
         landmarks = predictor(gray, faces[0])
-
+        
+       
+    
         # Left eyes
         left_point = (landmarks.part(37).x, landmarks.part(37).y)
         right_point = (landmarks.part(40).x, landmarks.part(40).y)
@@ -192,6 +227,7 @@ def phat_effect(detector, predictor, frame):
         eyes_x = int(landmarks.part(43).x + abs((landmarks.part(43).x - landmarks.part(44).x)//2))
         eyes_y = abs(landmarks.part(44).y)
 
+ 
         # print(eyes_width, eyes_height)
 
         merge(frame, eyes, mask, (eyes_x, eyes_y))
