@@ -31,18 +31,6 @@ CNN Dlib face Landmark Detection - [shape_predictor_68_face_landmarks.dat](http:
 │       shape_predictor_68_face_landmarks.dat
 ```
 
-
-```
-Change the **.gif path** if needed in **main.py**
-```
-gif_to_numpy("path_to_gif")
-```
-Then **uncomment** your function effect in **main.py**
-```
-#   frame = SonGoku_effect(detector, predictor, frame, frame_count)
-#   frame = Sharingan_effect(detector, predictor, frame)
-#   frame = Anbu_effect(detector, predictor, frame)
-```
 ## Usage
 
 ```
