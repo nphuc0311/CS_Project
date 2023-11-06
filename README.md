@@ -36,7 +36,3 @@ CNN Dlib face Landmark Detection - [shape_predictor_68_face_landmarks.dat](http:
 ```
 python main.py
 <<<<<<< HEAD
-```
-=======
-```
->>>>>>> d0a5b48b00818178da24b4415d90186e09efece1
